@@ -11,32 +11,108 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 let employeeList = [];
 createEngineer();
+createManager();
+createIntern();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 function createEngineer() {
     inquirer.prompt([
         {
             type: "input",
-            message: "what isyour name",
+            message: "what is your name?",
             name: "name",
 
         },
         {
-            type: "input",
-            message: "what is your github",
-            name: "github",
-
-        },
-        {
             type: "number",
-            message: "what is your id",
+            message: "what is your id?",
             name: "id"
 
         },
+        {
+            type: "input",
+            message: "what is your email?",
+            name: "email"
+
+        },
+        {
+            type: "input",
+            message: "what is your github?",
+            name: "github",
+
+        },
+
 
     ]).then(function (answers) {
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
         employeeList.push(engineer);
+        fs.writeFile(outputPath, render(employeeList), 'utf-8')
+    });
+};
+
+function createManager() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "what is your name?",
+            name: "name",
+
+        },
+        {
+            type: "number",
+            message: "what is your id?",
+            name: "id"
+
+        },
+        {
+            type: "input",
+            message: "what is your email?",
+            name: "email"
+
+        },
+        {
+            type: "number",
+            message: "what is your office number?",
+            name: "officeNumber",
+
+        },
+
+    ]).then(function (answers) {
+        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+        employeeList.push(manager);
+        fs.writeFile(outputPath, render(employeeList), 'utf-8')
+    });
+};
+function createIntern() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "what is your name?",
+            name: "name",
+
+        },
+        {
+            type: "number",
+            message: "what is your id?",
+            name: "id"
+
+        },
+        {
+            type: "input",
+            message: "what is your email?",
+            name: "email"
+
+        },
+        {
+            type: "input",
+            message: "what school do you attend?",
+            name: "school",
+
+        },
+
+    ]).then(function (answers) {
+        const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+        employeeList.push(intern);
         fs.writeFile(outputPath, render(employeeList), 'utf-8')
     });
 };
