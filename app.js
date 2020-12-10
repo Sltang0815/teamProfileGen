@@ -10,7 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 let employeeList = [];
-createEngineer();
+
 createManager();
 createIntern();
 // Write code to use inquirer to gather information about the development team members,
@@ -49,6 +49,7 @@ function createEngineer() {
         fs.writeFile(outputPath, render(employeeList), 'utf-8')
     });
 };
+createEngineer();
 
 function createManager() {
     inquirer.prompt([
